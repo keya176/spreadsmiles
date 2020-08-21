@@ -47,18 +47,6 @@ def donatebelongings(request):
     return render(request, 'user/donatebelongings.html')
 
 
-# def createevent(request):
-
-#     form = EventForm()
-
-#     if request.method == 'POST':
-#         form = EventForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#         return redirect('/allevents')
-
-#     context = {'form': form}
-#     return render(request, 'user/createevent.html', context)
 
 
 def orghome(request, pk):
