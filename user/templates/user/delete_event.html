@@ -1,0 +1,19 @@
+{% extends "user/base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+    <br><br>
+    <hr> 
+    <p class="display-4">Are you sure you want to delete?</p>
+    <h1>{{event.event_title}}</h1>
+    <form action="" method="POST">
+        {%csrf_token %}
+         <a href="/orghome/{{event.organization_name.id}}S" class="btn btn-warning">Cancle</a>
+         <input type="submit" class="btn btn-danger" value="Confirm">
+    </form>
+    <br><br>
+    <hr> 
+{% endblock %}
