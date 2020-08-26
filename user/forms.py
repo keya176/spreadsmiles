@@ -11,7 +11,7 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = '__all__'
 
-
+#  user creation form customize
 class CreateUserForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'Enter Organization Name'}))

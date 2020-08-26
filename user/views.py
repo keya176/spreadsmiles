@@ -201,11 +201,6 @@ def donatebelongings(request, pk):
 @login_required(login_url='/login')
 @allowed_users(allowed_roles='organizations')
 def orghome(request, pk):
-    # organization = Organization.objects.get(id=pk)
-    # events = organization.event_set.all()
-    # event_count = events.count()
-    # context = {'organization': organization,
-    #            'events': events, 'event_count': event_count}
     organization = Organization.objects.get(id=pk)
     events = organization.event_set.all()
     mdonators = MoneyDonatorInfo.objects.all()
