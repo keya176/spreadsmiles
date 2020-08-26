@@ -123,9 +123,16 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+# Email
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True

@@ -11,156 +11,17 @@
       <br />
       <div class="main">
         <div class="row">
+        {% for image in images %}
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="sgallary1">
               <div class="gallary">
                 <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
+                  ><img src="{{image.image.url}}" alt="wait" width="300" height="200"
                 /></a>
-                <div class="des">Description if any</div>
+                <div class="des">{{image.des}}</div>
               </div>
             </div>
           </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
+        {% endfor %}
         </div>
-
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="sgallary1">
-              <div class="gallary">
-                <a href="img/1.jpg"
-                  ><img src="{% static 'images/f.jpg'%}" alt="wait" width="300" height="200"
-                /></a>
-                <div class="des">Description if any</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="page">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
-      </div>
-      <br />
 {% endblock content %}

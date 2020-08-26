@@ -14,11 +14,7 @@
     <div class="col-md-4 col-sm-12 col-xs-12">
       <div class="card" style="width: 16rem;" ;>
         <div class="image">
-          {% if event.cover %}
           <img src="{{event.cover.url}}" alt="Coming soon" />
-        {% else %}
-          <img src="{% static 'image/f.jpg' %}" alt="Coming soon" />
-        {% endif %}
         </div>
         <div class="title">
           <h1>{{event.event_title}}</h1>
@@ -38,13 +34,15 @@
 <div class="page">
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    {% if events.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{events.previous_page_number}}">Previous</a></li>
+    {% endif %}
+      <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+      <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+      <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+    {% if events.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{events.next_page_number}}">Next</a></li>
+    {% endif %}
     </ul>
   </nav>
 </div>

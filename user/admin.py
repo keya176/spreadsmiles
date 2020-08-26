@@ -6,3 +6,6 @@ from .models import *
 admin.site.register(Event)
 admin.site.register(Organization)
 admin.site.register(MoneyDonatorInfo)
+admin.site.register(BelongingsDonatorInfo)
+admin.site.register(AdminPickup)
+admin.site.register(Gallary)

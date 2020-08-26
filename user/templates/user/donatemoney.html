@@ -1,122 +1,103 @@
-{% extends "user/base.html" %}
-{% load static %}
-
-{% block css %}
+{% extends "user/base.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/donatemoney.css' %}" />
-{% endblock css %}
-
-{% block content %}
+{% endblock css %} {% block content %}
+<script>
+function myFunction1() {
+  var x = document.getElementById("radioid").value;
+  document.getElementById("id_amount").value = x;
+}
+function myFunction2() {
+  var x = document.getElementById("radioid1").value;
+  document.getElementById("id_amount").value = x;
+}
+function myFunction3() {
+  var x = document.getElementById("radioid2").value;
+  document.getElementById("id_amount").value = x;
+}
+function myFunction4() {
+  var x = document.getElementById("radioid3").value;
+  document.getElementById("id_amount").value = x;
+}
+</script>
 <div class="mains">
-<div class="main"><br>
-      <div class="box">
-        <h3>Select Your Amount or Input Below</h3>
-        <div class="amount">
-          <div class="radio-group">
-             <div class="n">
-              <label for="radioid" class="radio">
-              <input type="radio" name="money" id="radioid" class="radio__input">
+  <div class="main">
+    <br />
+    <div class="box">
+      <h3>Select Your Amount or Input Below</h3>
+      <div class="amount">
+        <div class="radio-group">
+          <div class="n">
+            <label for="radioid" class="radio" onclick="myFunction1()">
+              <input
+                type="radio"
+                name="money"
+                id="radioid"
+                value="500"
+                class="radio__input"
+              />
               <div class="radio__radio"></div>
-             
+
               500Tk
-              </label></div>
-              <div class="n0">
-              <label for="radioid1" class="radio">
-              <input type="radio" name="money" id="radioid1" class="radio__input">
+            </label>
+          </div>
+          <div class="n0">
+            <label for="radioid1" class="radio" onclick="myFunction2()">
+              <input
+                type="radio"
+                name="money"
+                id="radioid1"
+                value="1000"
+                class="radio__input"
+              />
               <div class="radio__radio"></div>
               1000Tk
-              </label> </div>
-              <div class="n1">
-              <label for="radioid2" class="radio">
-              <input type="radio" name="money" id="radioid2" class="radio__input">
-              <div class=" radio__radio"></div>
-             2000Tk             
-              </label> </div>
-              <div class="n2">
-              <label for="radioid3" class="radio">
-              <input type="radio" name="money" id="radioid3" class="radio__input">
-              <div class="  radio__radio"></div>
-              
+            </label>
+          </div>
+          <div class="n1">
+            <label for="radioid2" class="radio" onclick="myFunction3()">
+              <input
+                type="radio"
+                name="money"
+                id="radioid2"
+                value="2000"
+                class="radio__input"
+              />
+              <div class="radio__radio"></div>
+              2000Tk
+            </label>
+          </div>
+          <div class="n2">
+            <label for="radioid3" class="radio" onclick="myFunction4()">
+              <input
+                type="radio"
+                name="money"
+                id="radioid3"
+                value="5000"
+                class="radio__input"
+              />
+              <div class="radio__radio"></div>
+
               5000Tk
-              </label> </div> 
-              
-          </div>
-            
-            <div class="text-center">
-              <form action="" method="POST" autocomplete="off">
-              {% csrf_token %}
-              {{form.event}}<br>
-              {{form.amount}}<br>
-              {{form.name}}<br>
-              {{form.email}}<br>
-              {{form.contact}}<br>
-              <div class="form-group co">
-                {{form.opinion}}
-              </div>
-              <input type="submit" class="btn cs" value="Proceed to pay">
-              </form>
-            </div>
-          
-        </div>
-      </div>
-      </div>
-      </div>
-      <footer>
-        <div class="footer-top">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12 segment-one">
-              <h2>Spread Smiles</h2>
-            </div>
-            <div class="col-md-3 col-sm-6 ctwoxs-12 segment-two">
-              <h2>Links</h2>
-              <ul>
-                <li><a href="about.html">What we do</a></li>
-                <li><a href="signup.html">Join us</a></li>
-                <li><a href="gallary.html">Gallary</a></li>
-                <li><a href="viewevents.html">Donate</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 ctwoxs-12 segment-three">
-              <h2>Contact</h2>
-              <ul>
-                <li>Uttara,Dhaka,Bangladesh</li>
-                <li>01xxxxxxxx</li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 ctwoxs-12 segment-four">
-              <h2>Follow us</h2>
-              <p>
-                Follow us on our social media profile in order to keep updated
-                with our recent task
-              </p>
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
+            </label>
           </div>
         </div>
-      </footer>
+
+        <div class="text-center">
+          <form action="" method="POST" autocomplete="off">
+            {% csrf_token %}
+            <span style="display:none">{{form.event}}</span><br />
+            {{form.amount}}<br />
+            {{form.name}}<br />
+            {{form.email}}<br />
+            {{form.contact}}<br />
+            <div class="form-group co">
+              {{form.opinion}}
+            </div>
+            <input type="submit" class="btn cs" value="Proceed to pay" />
+          </form>
+        </div>
+      </div>
     </div>
-    <script
-      src="https://kit.fontawesome.com/832cd3cad9.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+  </div>
+</div>
 {% endblock content %}

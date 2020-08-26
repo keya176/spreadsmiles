@@ -8,66 +8,56 @@
 {% block content %}
 <div class="mains">
   <div class="main">
-  
-  <form action="" method="POST">
-  {% csrf_token %}
-
-  <div class="form">
-   <h4>Sign Up Here</h4>
-  <div class="input-box">
-    
-    {{form.username}}
-  </div>
-  <div class="input-box">
-      
-    {{form.email}}
-      
-  </div>
-    <div class="input-box">
-    
-      {{form.password1}}
-      <div class="invalid-feedback">This Password is not Safe</div>
-      
-      
-    </div>
-    <div class="input-box">
-    
-      {{form.password2}}
+    <div class="form">
+    <form method="POST" action="">
+    {% csrf_token %}
+      <h4>Sign Up Here</h4>
+      <div class="input-box">
+        {{form.username}}
+      </div>
+      <div class="input-box">
+        {{form.email}}
+      </div>
+      <div class="input-box">
+        {{form.password1}}
         <div class="invalid-feedback">This Password is not Safe</div>
-    </div>
+      </div>
+      <div class="input-box">
+        {{form.password2}}
+        <div class="invalid-feedback">Passwords not matching</div>
+      </div>
       <div class="input-box">
         {{orgform.orgcontact}}
+      </div>
+      <div class="input-box">
+        {{orgform.orglicense}}
       </div>
       <div class="input-box">
         {{orgform.orgaddress}}
       </div>
       <div class="input-box">
-        {{orgform.orglicense}}
+        <input type="submit" value="Sign Up">
       </div>
-    
-    <div class="input-box">
-    
-      <input type="submit"  value="Sign Up"  >
-      
-    </div> <br>
-     
-          
+      </form>
+      <br />
+
       <a href="/login" class="sb"><p>One of us? just Sign-In!</p></a>
       <div class="social-media">
         <ul>
-          <a href="#"><li><img class="wr"src="images/facebook.png"></li></a>
-          <a href=""><li><img src="images/twitter.png"></li></a>
-          <a href="#"><li><img src="images/linkedin.png"></li></a>
-          
-          
+          <a href="#"
+            ><li><img class="wr" src="{% static 'images/facebook.png'%}" /></li
+          ></a>
+          <a href=""
+            ><li><img src="{% static 'images/twitter.png'%}" /></li
+          ></a>
+          <a href="#"
+            ><li><img src="{% static 'images/linkedin.png' %}" /></li
+          ></a>
         </ul>
       </div>
-    
-
-   </div>
-  </form>
     </div>
-     </div>
+  </div>
+</div>
 
 <br />
 {% endblock content %}

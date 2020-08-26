@@ -12,7 +12,7 @@
     {% csrf_token %}
     <div class="form">
       <h4>Insert Events Here</h4>
-      <div class="input-box">
+      <div class="input-box" style="display:none">
         {{form.organization_name}}
       </div>
       <div class="input-box">
@@ -27,26 +27,21 @@
       </div>
 
       <div class="form-group text-center">
-        <select class="custom-select" id="validationTooltip03">
-          <option value="1"> Event Type</option>
-          <option value="1">Money</option>
-          <option value="2">Belongings</option>
-          <option value="2">Both</option>
-        </select>
+        {{form.event_type}}
       </div>
 
       <div class="col-md-6 mb-3 ce text-center">
         <label for="id_cover">
-              <span class="material-icons "> add_photo_alternate </span>Choose a
-              Photo</label
-            >
-            {{form.cover}}
+          <span class="material-icons"> add_photo_alternate </span>Choose a
+          Photo</label
+        >
+        {{form.cover}}
       </div>
       <div class="input-box text-center z">
         <button class="btn cs" type="submit">Insert Event</button>
       </div>
       <br />
-    </div>ssss
+    </div>
   </div>
 </div>
 {% endblock content %}
