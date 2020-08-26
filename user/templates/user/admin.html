@@ -1,0 +1,369 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+
+    <title>Admin</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <main class="shadow-lg main col-md-9 col-lg-10">
+          <h1 class="h2 mb-5">Dashboard </h1>
+          <div class="row mb-5">
+            <div class="col-md-4">
+              <div
+                class="card text-white bg-dark mb-3"
+                style="max-width: 15rem;"
+              >
+                <div class="card-body">
+                  <p class="card-text">
+                    <i class="fas fa-building"></i> Organizations
+                  </p>
+                  <h5 class="card-title">{{inactive_users.count}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div
+                class="card text-white bg-dark mb-3"
+                style="max-width: 15rem;"
+              >
+                <div class="card-body">
+                  <p class="card-text">
+                    <i class="fas fa-calendar-week"></i> Events
+                  </p>
+                  <h5 class="card-title">{{events.count}}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div
+                class="card text-white bg-dark mb-3"
+                style="max-width: 15rem;"
+              >
+                <div class="card-body">
+                  <p class="card-text">
+                    <i class="fas fa-dollar-sign"></i> Donations
+                  </p>
+                  <h5 class="card-title">{{donations.count}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content" id="v-pills-tabContent">
+            <div
+              class="table-responsive tab-pane fade show active"
+              id="v-pills-home"
+              role="tabpanel"
+              aria-labelledby="v-pills-home-tab"
+            >
+              <h1 class="h4 mb-5">
+                Organizations <i class="far fa-building"></i>
+              </h1>
+              <table class="shadow table mytable table-borderless text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">License No</th>
+                    <th scope="col">Contact No</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for inactive_user in inactive_users %}
+                  <tr>
+                    <th scope="row">{{inactive_user.id}}</th>
+                    <td>{{inactive_user.orgname}}</td>
+                    <td>{{inactive_user.orgemail}}</td>
+                    <td>{{inactive_user.orglicense}}</td>
+                    <td>{{inactive_user.orgcontact}}</td>
+                    <td>{{inactive_user.orgaddress}}</td>
+                    <td>
+                    {% if inactive_user.user.is_active %}
+                      <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#user{{inactive_user.id}}">Deactivate
+                      </button>
+                    {% else %}
+                      <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#user{{inactive_user.id}}">
+                        Activate
+                      </button>
+                    {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <div
+              class="table-responsive tab-pane fade"
+              id="v-pills-profile"
+              role="tabpanel"
+              aria-labelledby="v-pills-profile-tab"
+            >
+              <h1 class="h4 mb-5">
+                Events <i class="fas fa-calendar-week"></i>
+              </h1>
+              <table class="shadow table mytable table-borderless text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Hosted By</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Motto</th>
+                    <th scope="col">Goal</th>
+                    <th scope="col">Raised</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for event in events %}
+                  <tr>
+                    <th scope="row">{{event.id}}</th>
+                    <td class>{{event.event_title}}</td>
+                    <td class>{{event.organization_name}}</td>
+                    <td>{{event.get_event_type_display}}</td>
+                    <td>Help</td>
+                    <td>{{event.goal}}</td>
+                    <td>59%</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-danger">Disable</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="table-responsive tab-pane fade"
+              id="v-pills-profile1"
+              role="tabpanel"
+              aria-labelledby="v-pills-profile-tab"
+            >
+              <h1 class="h4 mb-5">
+                Donations Pickup Request <i class="fas fa-dollar-sign"></i>
+              </h1>
+              <table class="shadow table mytable table-borderless text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Event</th>
+                    <th scope="col">Organization</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for donation in donations %}
+                  <tr>
+                    <td>{{donation.event}}</td>
+                    <td>{{donation.organization.orgname}}</td>
+                    <td>{{donation.name}}</td>
+                    <td>{{donation.email}}</td>
+                    <td>{{donation.contact}}</td>
+                    <td>{{donation.address}}</td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-primary">Pick Up</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="table-responsive tab-pane fade"
+              id="v-pills-profile2"
+              role="tabpanel"
+              aria-labelledby="v-pills-profile-tab"
+            >
+              <h1 class="h4 mb-5">
+                Donations Pickup Request <i class="fas fa-dollar-sign"></i>
+              </h1>
+              <table class="shadow table mytable table-borderless text-center">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="2">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">
+                    <form method="POST" action="/upgallary/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file"  name="image" id="id_image" accept="image/*">
+                    <button type="submit" class="btn btn-sm btn-primary">Upload New</button>
+                    </form>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gallary in gallarys %}
+                  <tr>
+                    <td><img style="border-radius:8px" width="100px" src="{{gallary.image.url}}"></td>
+                    <td>{{gallary.image.name}}</td>
+                    <td  colspan="2">{{gallary.des}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+          <div class="position-sticky pt-3">
+            <a class="navbar-brand" href="/"><img src="{% static 'images/logo.svg' %}" alt="logo" /></a>
+            <ul
+              class="nav flex-column nav-pills mt-5"
+              id="v-pills-tab"
+              role="tablist"
+              aria-orientation="vertical"
+            >
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="v-pills-home-tab"
+                  data-toggle="pill"
+                  href="#v-pills-home"
+                  role="tab"
+                  aria-controls="v-pills-home"
+                  aria-selected="true"
+                  ><i class="fas fa-building"></i> Organizations</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="v-pills-profile-tab"
+                  data-toggle="pill"
+                  href="#v-pills-profile"
+                  role="tab"
+                  aria-controls="v-pills-profile"
+                  aria-selected="false"
+                  ><i class="fas fa-calendar-week"></i> Events</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="v-pills-profile-tab"
+                  data-toggle="pill"
+                  href="#v-pills-profile1"
+                  role="tab"
+                  aria-controls="v-pills-profile1"
+                  aria-selected="false"
+                  ><i class="fas fa-money-check-alt"></i> Donations</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="v-pills-profile-tab"
+                  data-toggle="pill"
+                  href="#v-pills-profile2"
+                  role="tab"
+                  aria-controls="v-pills-profile2"
+                  aria-selected="false"
+                  ><i class="fas fa-images"></i> Gallary</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fas fa-sign-out-alt"></i>Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <img class="profile img-fluid" src="{% static 'images/profile.jpg' %}" alt="" />
+          <div class="info">
+            <h1 class="h6">
+              {{request.user}}
+            </h1>
+            <i class="fas fa-user-cog"></i> SuperUser
+          </div>
+        </nav>
+      </div>
+    </div>
+{% for inactive_user in inactive_users %}
+    <div
+      class="modal fade"
+      id="user{{inactive_user.id}}"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Are you Sure?
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span style="color: #fff;" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          {% if inactive_user.user.is_active %}
+            You are Deactivating an Organization and they will not be able to login
+          {% else %}
+            You are Activating an Organization so they can login
+          {% endif %}  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Cancel
+            </button>
+            {% if inactive_user.user.is_active %}
+            <form method="POST" action="/deapprove/{{inactive_user.user.id}}/">
+            {% else %}
+            <form method="POST" action="/approve/{{inactive_user.user.id}}/">
+            {% endif %}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Confirm</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+
+    <!-- Optional JavaScript -->
+    <!-- Popper.js first, then Bootstrap JS -->
+    <script
+      src="https://kit.fontawesome.com/832cd3cad9.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

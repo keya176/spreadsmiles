@@ -1,0 +1,166 @@
+body {
+  background-color: #170c0c;
+  color: white;
+  margin: 0;
+  padding: 0;
+
+  font-family: poppins;
+  font-size: 14px;
+  padding-bottom: 50px;
+}
+
+.main {
+  position: relative;
+  width: 650px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+}
+.mains {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+.main:after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #ff0047, #6eff00);
+  pointer-events: none;
+  animation: animate 10s linear infinite;
+}
+@keyframes animate {
+  0% {
+    filter: blur(10px) hue-rotate(0deg);
+  }
+  100% {
+    filter: blur(0px) hue-rotate(450deg);
+  }
+}
+.form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.form h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  text-align: center;
+  padding: 0;
+  color: white;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
+.form input.s {
+  width: 50%;
+  margin-left: 3px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.form .input-box input {
+  width: 50%;
+  height: 50%;
+
+  border: 1px solid white;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: black;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  padding: 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  transition: 0.3s;
+  font-size: 14px;
+  font-family: Poppins;
+}
+.form .input-box input[type="password"]:focus {
+  border-color: #ffda15;
+  box-shadow: 0 0 8px 0 #ffda15;
+}
+.form .input-box input[type="email"]:focus {
+  border-color: #ffda15;
+  box-shadow: 0 0 8px 0 #ffda15;
+}
+::placeholder {
+  color: black;
+  text-align: center;
+}
+.form .input-box input[type="submit"] {
+  background: #fff;
+  color: #000;
+  border: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  max-width: 100px;
+  cursor: pointer;
+}
+.form a {
+  text-decoration: none;
+}
+.form .sa p {
+  color: white;
+  font-size: 15px;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+.form .sb p {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+
+  text-transform: capitalize;
+}
+.social-media {
+  width: 100%;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.social-media ul {
+  list-style: none;
+  margin-right: 30px;
+}
+
+.social-media ul li {
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 10px;
+}
+
+.social-media img {
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+}
+.form .wr {
+  background-color: white;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+}

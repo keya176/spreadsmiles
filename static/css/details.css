@@ -1,0 +1,98 @@
+body {
+  background-color: #170c0c;
+  font-family: poppins;
+  font-size: 14px;
+}
+
+.display-4 {
+  font-size: 33px;
+  font-weight: bold;
+  font-family: poppins;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 50px;
+}
+.lead {
+  font-size: 14px;
+  font-family: poppins;
+  color: white;
+  text-align: justify;
+  line-height: 30px;
+}
+.jumbotron {
+  background: none;
+}
+
+.ss {
+  border: 1px solid;
+  border-color: black;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ffda15;
+  font-weight: bold;
+}
+.ss:hover {
+  color: white;
+  background-color: black;
+  border-color: #ffda15;
+}
+
+div.progress {
+  background-color: #170c0c;
+  text-align: center;
+  border: 2px solid #ffda15;
+  border-radius: 8px;
+}
+div.progress-bar {
+  font-size: 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.sr {
+  font-size: 16px;
+}
+.display-3 {
+  color: #ffda15;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+.pic {
+  width: 100%;
+}
+.new {
+  float: right;
+  width: 250px;
+  height: 250;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.card {
+  margin: auto;
+  margin-bottom: 5px;
+  background: linear-gradient(#054f38, black);
+  box-shadow: 0px 2px 10px green;
+}
+.card-body h5 {
+  font-size: 18px;
+  color: white;
+  background-size: cover;
+  border-radius: 5px;
+}
+.card-body p {
+  font-size: 17px;
+  color: white;
+}
+
+.carousel-inner {
+  border-radius: 8px;
+  max-height: 333px;
+}
+
+.jumbotron {
+  padding: 0rem 2rem;
+  margin: 0;
+}
