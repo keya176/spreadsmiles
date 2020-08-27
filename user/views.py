@@ -51,7 +51,6 @@ def registerPage(request):
     return render(request, 'user/registration.html', context)
 
 
-@login_required(login_url='/login')
 @unauthenticated_user
 def thankyouuser(request):
     return render(request, 'user/thankyouuser.html')
