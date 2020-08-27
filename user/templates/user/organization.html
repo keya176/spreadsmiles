@@ -1,28 +1,46 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'css/organization.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
     <title>Organization Home Page</title>
   </head>
   <body>
     <div class="container-fluid">
- 
- <div class=row>
-  
-   <main class="main shadow-lg col-md-9 col-lg-10 ">
-   <h1 class="h2 mb-5">Dashboard <i class="fas fa-columns"></i></h1>
+      <div class="row">
+        <main class="main shadow-lg col-md-9 col-lg-10">
+          <nav
+            class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+          >
+            <button
+              class="navbar-toggler position-absolute d-md-none collapsed"
+              type="button"
+              data-toggle="collapse"
+              data-target="#sidebarMenu"
+              aria-controls="sidebarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </nav>
+          <h1 class="h2 mb-5">Dashboard <i class="fas fa-columns"></i></h1>
           <div class="row text-center mb-5">
             <div class="col-md-4">
               <div
                 class="card text-white bg-dark mb-3"
-                style="max-width: 15rem;"
+                style="max-width: 15rem"
               >
                 <div class="card-body">
                   <p class="card-text">
@@ -35,7 +53,7 @@
             <div class="col-md-4">
               <div
                 class="card text-white bg-dark mb-3"
-                style="max-width: 15rem;"
+                style="max-width: 15rem"
               >
                 <div class="card-body">
                   <p class="card-text">
@@ -48,7 +66,7 @@
             <div class="col-md-4">
               <div
                 class="card text-white bg-dark mb-3"
-                style="max-width: 15rem;"
+                style="max-width: 15rem"
               >
                 <div class="card-body">
                   <p class="card-text">
@@ -59,63 +77,58 @@
               </div>
             </div>
           </div>
-        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-content" id="v-pills-tabContent">
             <div
               class="table-responsive tab-pane fade show active"
               id="v-pills-home"
               role="tabpanel"
               aria-labelledby="v-pills-home-tab"
             >
-              <h1 class="h4 mb-5">
-                Events <i class="far fa-building"></i> 
-              </h1>  
-             
-              
+              <h1 class="h4 mb-5">Events <i class="far fa-building"></i></h1>
+
               <table class="shadow table mytable table-borderless text-center">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Motto</th>
                     <th scope="col">Goal</th>
                     <th scope="col">Raised</th>
                     <th scope="col">
-                    <a class="btn btn-warning btn-sm" href="/create_event">
+                      <a class="btn btn-warning btn-sm" href="/create_event">
                         Create an Event
-                    </a>
+                      </a>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for event in events %}
+                  {% for event in events %}
                   <tr>
                     <th scope="row">{{event.id}}</th>
                     <td>{{event.event_title}}</td>
                     <td>{{event.event_type}}</td>
-                    <td>Help</td>
                     <td>{{event.goal}}</td>
                     <td>{{event.raised}}</td>
                     <td>
                       <a
                         class="btn btn-sm btn-success"
-                        href="{% url 'update' 'event.id' %}"
+                        href="{% url 'update' event.id %}"
                       >
-                        Update 
+                        Update
                       </a>
                       <a
                         class="btn btn-sm btn-danger"
                         href="/delete_event/{{event.id}}"
                       >
-                        Delete 
+                        Delete
                       </a>
                     </td>
                   </tr>
-                {% endfor %}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
-              <div
+            <div
               class="table-responsive tab-pane fade"
               id="v-pills-profile2"
               role="tabpanel"
@@ -132,30 +145,34 @@
                     <th scope="col">Email</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Opinion</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for bdonator in bdonators %}
-                {% ifequal bdonator.event.organization_name request.user.organization %}
-                <tr>
-                  <td>{{bdonator.event}}</td>
-                  <td>{{bdonator.name}}</td>
-                  <td>{{bdonator.email}}</td>
-                  <td>{{bdonator.contact}}</td>
-                  <td>{{bdonator.address}}</td>
-                  <td>
-                  {% if bdonator.is_submitted %}
-                    <a href="" class="btn btn-sm btn-warning">Submitted for pickup</a>
-                  {% else %}
-                    <a href="/adminpickup/{{bdonator.id}}" class="btn btn-sm btn-primary">Submit for pickup</a>
-                  {% endif %}
-                  </td>
-                </tr>
-                {% endifequal %}
-                {% endfor %}
-                  
-                  
+                  {% for bdonator in bdonators %}
+                  <tr>
+                    <td>{{bdonator.event}}</td>
+                    <td>{{bdonator.name}}</td>
+                    <td>{{bdonator.email}}</td>
+                    <td>{{bdonator.contact}}</td>
+                    <td>{{bdonator.address}}</td>
+                    <td>{{bdonator.opinion}}</td>
+                    <td>
+                      {% if bdonator.is_submitted %}
+                      <a href="" class="btn btn-sm btn-warning"
+                        >Submitted for pickup</a
+                      >
+                      {% else %}
+                      <a
+                        href="/adminpickup/{{bdonator.id}}"
+                        class="btn btn-sm btn-primary"
+                        >Submit for pickup</a
+                      >
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -166,7 +183,7 @@
               aria-labelledby="v-pills-profile-tabs"
             >
               <h1 class="h4 mb-5">
-                Money Donation  <i class="fas fa-calendar-week"></i>
+                Money Donation <i class="fas fa-calendar-week"></i>
               </h1>
               <table class="shadow table mytable table-borderless text-center">
                 <thead>
@@ -175,35 +192,36 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Opinion</th>
+                    <th scope="col">Donated</th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for mdonator in mdonators  %}
-                {% ifequal mdonator.event.organization_name request.user.organization %}
+                  {% for mdonator in mdonators %}
                   <tr>
                     <td>{{mdonator.event}}</td>
                     <td>{{mdonator.name}}</td>
                     <td>{{mdonator.email}}</td>
                     <td>{{mdonator.contact}}</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-primary">Details</a>
-                    </td>
+                    <td>{{mdonator.opinion}}</td>
+                    <td>{{mdonator.success_amount}}</td>
                   </tr>
-                  {% endifequal %}
                   {% endfor %}
-                  
                 </tbody>
               </table>
             </div>
-            </div>
-            
-    </main> 
-    
-    <nav class=" col-md-3 col-lg-2 d-md-block sidebar"> 
-         <div class="position-sticky pt-3">
-            <a class="navbar-brand" href="/"><img src="{% static 'images/logo.svg' %}" alt="" /></a>
-             <ul
+          </div>
+        </main>
+
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 col-lg-2 d-md-block sidebar collapse"
+        >
+          <div class="position-sticky pt-3">
+            <a class="navbar-brand" href="/"
+              ><img src="{% static 'images/logo.svg' %}" alt=""
+            /></a>
+            <ul
               class="nav flex-column nav-pills mt-5"
               id="v-pills-tab"
               role="tablist"
@@ -231,61 +249,36 @@
                   aria-controls="v-pills-profile2"
                   aria-selected="false"
                   ><i class="fas fa-calendar-week"></i> Belongings</a
-                > 
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="v-pills-profile-tabs" href="#v-pills-profile1"
-                  role="tab"data-toggle="pill"
+                <a
+                  class="nav-link"
+                  id="v-pills-profile-tabs"
+                  href="#v-pills-profile1"
+                  role="tab"
+                  data-toggle="pill"
                   aria-controls="v-pills-profile1"
-                  aria-selected="false"><i class="fas fa-money-check-alt"></i> Money Donations</a
-                >
-              </li> 
-             
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="fas fa-cog"></i> Settings</a
+                  aria-selected="false"
+                  ><i class="fas fa-money-check-alt"></i> Money Donations</a
                 >
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="/logout"
                   ><i class="fas fa-sign-out-alt"></i> Logout</a
                 >
               </li>
             </ul>
-            
-            
-            </div>
-            <img class="profile  img-fluid" src="{% static 'images/profile.jpg' %}" alt="wait" />
-            
-          <div class="info">
-            <h1 class="h6">
-             Hi {{request.user}} 
-            </h1>
-            <i class="fas fa-user-cog"></i> SuperUser
           </div>
-    </nav>
-    
-    
-    </div> </div>
-    <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
+          <div class="info">
+            <h1 class="h6">Hi {{request.user}}</h1>
+            <i class="fas fa-user-cog"></i> Organization
+          </div>
+        </nav>
       </div>
     </div>
-  </div>
-</div>
 
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then Bootstrap JS -->
@@ -293,7 +286,15 @@
       src="https://kit.fontawesome.com/832cd3cad9.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

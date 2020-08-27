@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#created all the CRUD here
+# Create your models here.
 
 
 class Organization(models.Model):
@@ -33,7 +33,11 @@ class Event(models.Model):
     cover = models.ImageField(default="f.jpg", null=True, blank=True)
     event_title = models.CharField(max_length=200)
     description = models.TextField(max_length=500)
-    goal = models.IntegerField(null=True)
+    goal = models.DecimalField(
+        max_digits=20, decimal_places=2, null=True, blank=True)
+    raised = models.DecimalField(
+        max_digits=20, decimal_places=2, null=True, blank=True)
+    belgoal = models.CharField(max_length=200, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -43,11 +47,19 @@ class Event(models.Model):
 class MoneyDonatorInfo(models.Model):
     event = models.ForeignKey(
         Event, null=True, on_delete=models.SET_NULL, blank=True)
-    amount = models.IntegerField(null=True, blank=True)
+    organization = models.ForeignKey(
+        Organization, null=True, on_delete=models.SET_NULL, blank=True)
+    amount = models.DecimalField(
+        max_digits=20, decimal_places=2, null=True, blank=True)
     name = models.CharField(max_length=264, blank=True)
     email = models.CharField(max_length=264, blank=True)
     contact = models.CharField(max_length=264, blank=True)
     opinion = models.TextField(max_length=500, blank=True)
+    success_amount = models.DecimalField(
+        max_digits=20, decimal_places=2, null=True, blank=True)
+    val_id = models.CharField(max_length=264, null=True, blank=True)
+    tran_id = models.CharField(max_length=264, null=True, blank=True)
+    status = models.CharField(max_length=264, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -56,6 +68,8 @@ class MoneyDonatorInfo(models.Model):
 class BelongingsDonatorInfo(models.Model):
     event = models.ForeignKey(
         Event, null=True, on_delete=models.SET_NULL, blank=True)
+    organization = models.ForeignKey(
+        Organization, null=True, on_delete=models.SET_NULL, blank=True)
     name = models.CharField(max_length=264, blank=True)
     email = models.CharField(max_length=264, blank=True)
     contact = models.CharField(max_length=264, blank=True)

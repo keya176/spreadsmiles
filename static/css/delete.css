@@ -6,7 +6,88 @@ body{
     font-family:poppins;
     font-size:14px;
     
+   
+  
+
 }
+.navbar{
+  background-color:#170c0c;
+  text-transform: uppercase;
+  font-family: poppins;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  margin-left:0px;
+margin-bottom:30px;
+  
+ 
+    
+}
+a.nav-link{
+    color:white;
+}
+span.navbar-toggler-icon{
+    background-image:url('op.webp');
+}
+.t{
+    width:120px;
+    
+   background-size: cover;
+  grid-area: image;
+   
+   
+}
+.na ul li a:hover {
+  color: black;
+  background: #ffda15;
+  border-radius: 5px;
+}
+.drop a {
+  color: black;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.dropdown-item:hover {
+  background: #ffda15;
+  border-radius: 10px;
+}
+.dropdown-menu {
+  background: white;
+  padding: 0;
+}a.nav-link{
+    color:white;
+}
+span.navbar-toggler-icon{
+    background-image:url('op.webp');
+}
+.t{
+    width:120px;
+    
+   background-size: cover;
+  grid-area: image;
+   
+   
+}
+.na ul li a:hover {
+  color: black;
+  background: #ffda15;
+  border-radius: 5px;
+}
+.drop a {
+  color: black;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.dropdown-item:hover {
+  background: #ffda15;
+  border-radius: 10px;
+}
+.dropdown-menu {
+  background: white;
+  padding: 0;
+}
+
 
 .main{
     margin-top:40px;

@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
+    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -21,6 +22,21 @@
     <div class="container-fluid">
       <div class="row">
         <main class="shadow-lg main col-md-9 col-lg-10">
+        <nav
+            class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+          >
+            <button
+              class="navbar-toggler position-absolute d-md-none collapsed"
+              type="button"
+              data-toggle="collapse"
+              data-target="#sidebarMenu"
+              aria-controls="sidebarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </nav>
           <h1 class="h2 mb-5">Dashboard </h1>
           <div class="row mb-5">
             <div class="col-md-4">
@@ -129,7 +145,6 @@
                     <th scope="col">Motto</th>
                     <th scope="col">Goal</th>
                     <th scope="col">Raised</th>
-                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -141,10 +156,7 @@
                     <td>{{event.get_event_type_display}}</td>
                     <td>Help</td>
                     <td>{{event.goal}}</td>
-                    <td>59%</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-danger">Disable</a>
-                    </td>
+                    <td>{{event.raised}}</td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -224,7 +236,10 @@
             </div>
           </div>
         </main>
-        <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 col-lg-2 d-md-block sidebar collapse"
+        >
           <div class="position-sticky pt-3">
             <a class="navbar-brand" href="/"><img src="{% static 'images/logo.svg' %}" alt="logo" /></a>
             <ul

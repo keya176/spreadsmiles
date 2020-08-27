@@ -1,0 +1,23 @@
+{% extends "user/base.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/alert.css' %}" />
+{% endblock css %} {% block content %}
+<div class="mains">
+  <div class="main">
+    <div class="forms">
+      <div class="es">
+        <img class="fluid-img" src="{% static 'images/co.jpg' %}" alt="" />
+      </div>
+      <br />
+      <h5>Thank You</h5>
+      <p>
+        You Registration is complete Please wait for confirmation you will get
+        an email soon
+      </p>
+      <br />
+      <div class="input-box text-center z">
+        <a class="btn success" href="/" role="button" style="color: #000">Ok</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

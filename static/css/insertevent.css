@@ -10,6 +10,7 @@ body{
 
 }
 
+
 .main{
   position:relative;
   min-height:100vh;
@@ -187,7 +188,7 @@ border-color: #ffda15;
 {
   text-align:center;
 }
-.custom-select{
+select{
 display: inline-block;
 border-radius: 8px;
 box-sizing: border-box;
@@ -197,6 +198,6 @@ font-size:14px;
 
   
 }
-.custom-select:focus {
+select:focus {
   border-color: #ffda15;}
 }

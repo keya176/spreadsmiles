@@ -7,11 +7,20 @@ from .models import *
 
 
 class EventForm(forms.ModelForm):
+    event_title = forms.CharField(widget=forms.TextInput(
+        attrs={'placeholder': 'Enter Event Title'}))
+    goal = forms.DecimalField(widget=forms.NumberInput(
+        attrs={'placeholder': 'Enter Money Goal (Optional)'}))
+    belgoal = forms.CharField(widget=forms.TextInput(
+        attrs={'placeholder': 'Enter Belongins Goal (Optional)'}))
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'placeholder': 'Enter Description'}))
+
     class Meta:
         model = Event
         fields = '__all__'
 
-#  user creation form customize
+
 class CreateUserForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'Enter Organization Name'}))
@@ -41,7 +50,7 @@ class OrganizationForm(forms.ModelForm):
 
 
 class MoneyDonatorForm(forms.ModelForm):
-    amount = forms.IntegerField(widget=forms.NumberInput(
+    amount = forms.DecimalField(widget=forms.NumberInput(
         attrs={'placeholder': 'Enter Amount'}))
     name = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'Enter Name'}))

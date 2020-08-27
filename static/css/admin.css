@@ -1,28 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.3s all ease;
 }
+
 body {
   color: white;
   font-size: 16px;
-  /* background-color: #170c0c; */
+  background-color: #170c0c;
   font-family: poppins, sans-serif;
-  background: linear-gradient(45deg, #054f38, black);
-  animation: animate 10s linear infinite;
-  z-index: -1;
 }
-/* @keyframes animate {
-  0% {
-    filter: blur(0px) hue-rotate(0deg);
-  }
-  100% {
-    filter: blur(0px) hue-rotate(450deg);
-  }
-} */
 
 .main {
   /* background: linear-gradient(180deg, #36404b, #20262e); */
@@ -30,7 +20,6 @@ body {
   border-radius: 0 60px 60px 0;
   min-height: 100vh;
   padding: 30px;
-  z-index: 1;
 }
 
 .card {
@@ -39,7 +28,7 @@ body {
   border: none;
   height: 9rem;
   padding: 10px;
-  transition: all 0.3s ease;
+  transition: 0.3s all ease;
   margin: auto;
   box-shadow: 0px 4px 15px green;
 }
@@ -52,13 +41,10 @@ body {
 
 .card-title {
   font-size: 50px;
+  font-weight: 400;
   color: #ffda15;
-  font-family: Alata, sans-serif;
 }
-.h2,
-.h4 {
-  font-family: Alata, sans-serif;
-}
+
 .table {
   color: white;
   border-radius: 15px;
@@ -86,28 +72,17 @@ tr:hover {
   padding: 20px 5px;
 }
 
+.navbar .navbar-toggler {
+  top: 0.25rem;
+  right: 1rem;
+}
+
 .sidebar {
   position: fixed;
   right: 0;
-
-  height: 100vh;
-}
-
-nav {
-  text-align: center;
-}
-
-.navbar-brand img {
-  margin-top: 5%;
-  width: 50%;
-}
-
-.mytable .btn {
-  width: 95px;
-}
-
-.btn {
-  border-radius: 7px;
+  background-color: #170c0c;
+  top: 0;
+  bottom: 0;
 }
 
 .nav-link {
@@ -115,6 +90,36 @@ nav {
   padding: 20px 0px;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.navbar-brand img {
+  margin-top: 5%;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 0;
+    width: 60%;
+  }
+  .navbar-brand img {
+    margin-top: 50px;
+  }
+  .nav-link {
+    padding: 7px 0px;
+    margin-bottom: 0;
+  }
+}
+
+nav {
+  text-align: center;
+}
+
+.mytable .btn {
+  width: 110px;
+}
+
+.btn {
+  border-radius: 7px;
 }
 
 .nav-link:hover {
@@ -142,7 +147,7 @@ nav {
   background: linear-gradient(45deg, #054f38, black);
   border-radius: 10px;
   box-shadow: 4px 4px 15px green;
-  transition: 0.3s all ease;
+  transition: all 0.3s ease;
 }
 
 .modal-content:hover {

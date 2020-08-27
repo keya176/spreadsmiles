@@ -1,19 +1,12 @@
-{% extends "user/base.html" %} 
-{% load static %} 
-
-{% block css %}
+{% extends "user/base.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/details.css' %}" />
-{% endblock css %} 
-
-{% block content %}
+{% endblock css %} {% block content %}
 <br />
 <div class="row">
   <div class="col">
     <div class="jumbotron">
       <h1 class="display-4">{{event.event_title}}</h1>
-      <p class="lead">
-        {{event.description}}
-      </p>
+      <p class="lead">{{event.description}}</p>
       <hr class="my-4" />
     </div>
   </div>
@@ -72,38 +65,94 @@
 <br />
 <div class="row mt-5">
   <div class="col">
-  <h1 class="display-3 mb-2">Event Progress</h1>
-    <div class="card text-center" style="width: 70%;">
+    <h1 class="display-3 mb-2">Event Progress</h1>
+    <div class="card text-center" style="width: 100%">
       <div class="card-body">
         <div class="row align-items-center">
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <h5 class="card-title">Donors</h5>
+          {% if event.event_type == 'BH' %}
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5 class="card-title">Money Donors</h5>
             <br />
             <p>{{donators_count}}</p>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <h5 class="card-title">Time Left</h5>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5 class="card-title">Belongings Donors</h5>
             <br />
-            <p>{{event.event_type}}</p>
+            <p>{{bdonator.count}}</p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5 class="card-title">Date Create</h5>
+            <br />
+            <p>{{event.date_created}}</p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <a
+              class="btn ss btn-lg"
+              href="/donatemoney/{{event.id}}"
+              role="button"
+              >Donate Money</a
+            >
+            <a
+              class="btn ss btn-lg"
+              href="/donatebelongings/{{event.id}}"
+              role="button"
+              >Donate Belongings</a
+            >
+          </div>
+          {% else %}
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <h5 class="card-title">Donors</h5>
+            <br />
+            {% if event.event_type == 'MY' %}
+            <p>{{donators_count}}</p>
+            {% else %}
+            <p>{{bdonator.count}}</p>
+            {% endif %}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
-          {% if event.event_type == 'MY' %}
-          
-          
-            <a class="btn ss btn-lg" href="/donatemoney/{{event.id}}" role="button">Donate Now</a>
-            {% else %}
-             <a class="btn ss btn-lg" href="/donatebelongings/{{event.id}}" role="button">Donate Now</a>
-          {% endif %}
+            <h5 class="card-title">Date Create</h5>
+            <br />
+            <p>{{event.date_created}}</p>
           </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            {% if event.event_type == 'MY' %}
+            <a
+              class="btn ss btn-lg"
+              href="/donatemoney/{{event.id}}"
+              role="button"
+              >Donate Now</a
+            >
+            {% else %}
+            <a
+              class="btn ss btn-lg"
+              href="/donatebelongings/{{event.id}}"
+              role="button"
+              >Donate Now</a
+            >
+            {% endif %}
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 <br />
-<p class="lead sr text-center">Raised {{raised_p}}%</p>
-<div class="progress" style="height: 25px;">
+{% if event.event_type == 'BL' %}
+<p class="lead sr text-center">Goal</p>
+<div class="progress" style="height: 25px; border: none">
+  <div
+    class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+    role="progressbar"
+    style="width: 100%"
+  >
+    {{event.belgoal}}
+  </div>
+</div>
+{% else %}
+<p class="lead sr text-center">Raised</p>
+<div class="progress" style="height: 25px">
   <div
     class="progress-bar progress-bar-striped bg-warning progress-bar-animated"
     style="width: {{raised_p}}%"
@@ -113,17 +162,28 @@
 </div>
 <br />
 <p class="lead sr text-center">Goal</p>
-<div class="progress" style="height: 25px; border: none ">
+<div class="progress" style="height: 25px; border: none">
   <div
     class="progress-bar progress-bar-striped bg-success progress-bar-animated"
     role="progressbar"
-    style="width: 100%;"
+    style="width: 100%"
   >
     {{event.goal}}
   </div>
 </div>
+{% if event.event_type == 'BH' %}
+<p class="lead sr text-center mt-5">Belongings Goal</p>
+<div class="progress" style="height: 25px; border: none">
+  <div
+    class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+    role="progressbar"
+    style="width: 100%"
+  >
+    {{event.belgoal}}
+  </div>
+</div>
+{% endif %} {%endif%}
 <br />
 <br />
-
 
 {% endblock content %}

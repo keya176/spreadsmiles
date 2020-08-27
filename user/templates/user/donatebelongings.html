@@ -1,47 +1,31 @@
-{% extends "user/base.html" %}
-{% load static %} 
-{% block css %}
+{% extends "user/base.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/donatebelongings.css' %}" />
-{% endblock css %} 
-
-
-{% block content %}
+{% endblock css %} {% block content %}
 
 <div class="mains">
   <div class="main">
     <div class="form">
-    <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-      <h4>Donate Belongings Here</h4>
-      <div class="input-box" style="display:none">
-        {{form.event}}
-      </div>
-      <div class="input-box">
-        {{form.name}}
-      </div>
-      <div class="input-box">
-        {{form.email}}
-      </div>
-      <div class="input-box">
-        {{form.contact}}
-      </div>
-      <div class="input-box">
-        {{form.address}}
-      </div>
-      <br />
-      <div class="form-group co">
-        {{form.opinion}}
-      </div>
-      <div class="col-md-6 mb-3 ce">
-        <label for="id_image">
-          <span class="material-icons"> add_photo_alternate </span>Choose a
-          Photo</label
-        >
-        {{form.image}}
-      </div>
-      <div class="input-box text-center z">
-        <button class="btn cs" type="submit" >Submit Information</button>
-      </div>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h4>Donate Belongings Here</h4>
+        <div class="input-box" style="display: none">{{form.event}}</div>
+        <div class="input-box" style="display: none">{{form.organization}}</div>
+        <div class="input-box">{{form.name}}</div>
+        <div class="input-box">{{form.email}}</div>
+        <div class="input-box">{{form.contact}}</div>
+        <div class="input-box">{{form.address}}</div>
+        <br />
+        <div class="form-group co">{{form.opinion}}</div>
+        <div class="col-md-6 mb-3 ce">
+          <label for="id_image">
+            <span class="material-icons"> add_photo_alternate </span>Choose a
+            Photo</label
+          >
+          {{form.image}}
+        </div>
+        <div class="input-box text-center z">
+          <button class="btn cs" type="submit">Submit Information</button>
+        </div>
       </form>
       <br />
     </div>

@@ -1,0 +1,30 @@
+{% extends "user/base.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/alert.css' %}" />
+{% endblock css %} {% block content %}
+<div class="mains">
+  <div class="main">
+    <div class="forms">
+      <div class="es">
+      {% if status == 'VALID' %}
+      <img class="fluid-img" src="{% static 'images/co.jpg' %}" alt="" />
+      </div>
+      <br />
+      <h5>Succesfully Done</h5>
+      {% else %}
+      <img class="fluid-img" src="{% static 'images/er.jpg' %}" alt="" />
+      </div>
+      <br />
+      <h5>Something went wrong</h5>
+      {% endif %}
+
+      {% for message in messages %}
+      <p>{{message}}</p>
+      {% endfor %}
+      <br />
+      <div class="input-box text-center z">
+        <a class="btn success" href="/" role="button" style="color:#000">Ok</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

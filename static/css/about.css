@@ -3,17 +3,18 @@ body {
   font-family: poppins;
   font-size: 15px;
   padding-bottom: 170px;
+  color: white;
 }
+
 .display-4 {
-  font-size: 33px;
-  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 1px;
   color: white;
 }
 .lead {
-  font-size: 14px;
-  color: white;
-  letter-spacing: 1px;
+  font-size: 16px;
   text-align: justify;
+  color: white;
 }
 .jumbotron {
   background: none;
@@ -48,78 +49,37 @@ body {
   background-color: black;
   border-color: #ffda15;
 }
-h2 {
-  color: white;
+.card {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 220px;
+  margin: auto;
+  background-color: #170c0c;
+  border: 1px solid #1ee86f;
+  margin-bottom: 7px;
+}
+.card:hover {
+  transform: scale(1.15);
+}
+.main {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.gallary img {
+  width: 20%;
+  height: auto;
+
+  margin-bottom: 15px;
+}
+.sh h4 {
   font-size: 18px;
-  text-align: left;
+  letter-spacing: 1px;
+  text-align: center;
 }
-.footer-top {
-  background: #170c0c;
-  padding-top: 100px;
-  padding-bottom: 50px;
-  padding-left: 20px;
-}
-.segment-one {
-  margin: 10px 0;
-  padding-left: 50px;
-}
-.segment-two h2 {
-  font-family: poppins;
-}
-.segment-two ul {
-  margin: 0px;
-  padding: 0;
-
-  list-style: none;
-  color: white;
-}
-.segment-two ul li {
-  border-bottom: 1px solid #1ee86f;
-  line-height: 40px;
-}
-.segment-two ul li a {
-  color: white;
-  text-decoration: none;
-}
-.segment-three h2 {
-  padding-right: 0;
-  padding-left: 0;
-}
-.segment-three ul {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-  color: white;
-}
-.segment-four h2 {
-  color: white;
-
-  float: center;
-}
-.segment-four h2:before {
-  content: "|";
-  color: #c65039;
-  padding-right: 10px;
-}
-.segment-four p {
-  color: white;
-
-  font-size: 18px;
-}
-
-.segment-four a {
-  background: #1ee86f;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  border-radius: 50%;
-}
-.segment-four a i {
-  font-size: 16px;
-  color: white;
-  padding: 8px 10px;
-}
-img {
-  border-radius: 8px;
+.des {
+  margin-left: 2px;
+  margin-right: 5px;
 }

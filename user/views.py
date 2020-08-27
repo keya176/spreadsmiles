@@ -1,5 +1,6 @@
 from .forms import *
 from .models import *
+from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth.models import User, Group
 from .decorators import unauthenticated_user, allowed_users, admin_only
@@ -45,9 +46,15 @@ def registerPage(request):
             org.orgname = user.username
             org.orgemail = user.email
             org.save()
-            return redirect('/login')
+            return redirect('/thankyouuser')
     context = {'form': form, 'orgform': orgform}
     return render(request, 'user/registration.html', context)
+
+
+@login_required(login_url='/login')
+@unauthenticated_user
+def thankyouuser(request):
+    return render(request, 'user/thankyouuser.html')
 
 
 @unauthenticated_user
@@ -130,25 +137,26 @@ def bothevents(request):
 
 def donatemoney(request, pk):
     event = Event.objects.get(id=pk)
-    form = MoneyDonatorForm(initial={'event': event.id})
+    form = MoneyDonatorForm(
+        initial={'event': event.id, 'organization': event.organization_name.id})
     if request.method == 'POST':
         form = MoneyDonatorForm(request.POST)
         if form.is_valid():
-            form.save()
-            donator = MoneyDonatorInfo.objects.get(name=request.POST.get(
-                'name'), email=request.POST.get('email'), contact=request.POST.get('contact'))
-            return redirect('pay', pk=donator.id)
+            donator = form.save()
+            return redirect('pay', pk=donator.pk)
     context = {'form': form}
     return render(request, 'user/donatemoney.html', context)
 
 
 def payment(request, pk):
+    info = MoneyDonatorInfo.objects.get(id=pk)
     store_id = 'spere5f3aeaafa6b1d'
     api_key = 'spere5f3aeaafa6b1d@ssl'
     mypayment = SSLCSession(sslc_is_sandbox=True,
                             sslc_store_id=store_id, sslc_store_pass=api_key)
 
-    status_url = request.build_absolute_uri(reverse("status"))
+    status_url = request.build_absolute_uri(
+        reverse('status', kwargs={'pk': info.id}))
 
     mypayment.set_urls(success_url=status_url, fail_url=status_url,
                        cancel_url=status_url, ipn_url=status_url)
@@ -169,7 +177,8 @@ def payment(request, pk):
 
 
 @csrf_exempt
-def complete(request):
+def complete(request, pk):
+    info = MoneyDonatorInfo.objects.get(id=pk)
     if request.method == 'POST' or request.method == 'post':
         payment_data = request.POST
         print(payment_data)
@@ -177,18 +186,31 @@ def complete(request):
         if status == 'VALID':
             val_id = payment_data['val_id']
             tran_id = payment_data['tran_id']
+            success_amount = payment_data['amount']
+            info.val_id = val_id
+            info.tran_id = tran_id
+            info.status = status
+            info.success_amount = success_amount
+            info.save()
+            event = info.event
+            donators = event.moneydonatorinfo_set.all()
+            get_total = donators.aggregate(Sum('success_amount'))
+            raised = get_total['success_amount__sum']
+            event.raised = raised
+            event.save()
             messages.success(
-                request, 'Your Donation has been Completed Successfully, Redirecting to home page...')
+                request, 'Your Donation has been Completed Successfully')
         elif status == 'FAILED':
             messages.warning(
-                request, 'Your Donation has been Failed, Please try again, Redirecting to home page...')
-    context = {}
-    return render(request, 'user/complete.html', context)
+                request, 'Your Donation has been Failed, Please try again')
+    context = {'status': status}
+    return render(request, 'user/thankyou.html', context)
 
 
 def donatebelongings(request, pk):
     event = Event.objects.get(id=pk)
-    form = BelongingsDonatorForm(initial={'event': event.id})
+    form = BelongingsDonatorForm(
+        initial={'event': event.id, 'organization': event.organization_name.id})
     if request.method == 'POST':
         form = BelongingsDonatorForm(request.POST, request.FILES)
         if form.is_valid():
@@ -203,8 +225,8 @@ def donatebelongings(request, pk):
 def orghome(request, pk):
     organization = Organization.objects.get(id=pk)
     events = organization.event_set.all()
-    mdonators = MoneyDonatorInfo.objects.all()
-    bdonators = BelongingsDonatorInfo.objects.all()
+    mdonators = organization.moneydonatorinfo_set.all()
+    bdonators = organization.belongingsdonatorinfo_set.all()
     context = {'events': events,
                'mdonators': mdonators, 'bdonators': bdonators}
     return render(request, 'user/organization.html', context)
@@ -250,7 +272,7 @@ def apporg(request, pk):
             'Verified',  # subject
             'Your Information is verified. You can Log in to Spread Smile Now',  # message
             'maiesha35-177@diu.edu.bd',  # from email
-            ['hhsiju97@gmail.com', 'syeda35-174@diu.edu.bd'],  # to email
+            ['syeda35-174@diu.edu.bd'],  # to email
             html_message=html_message,
             fail_silently=False,
         )
@@ -269,21 +291,22 @@ def deapporg(request, pk):
 
 def singleevent(request, pk):
     event = Event.objects.get(id=pk)
-    donators = event.moneydonatorinfo_set.all()
+    donators = event.moneydonatorinfo_set.filter(status='VALID')
+    bdonator = event.belongingsdonatorinfo_set.all()
 
     donators_count = donators.count()
     if(donators_count == 0):
         raised = 0
         raised_p = 0
         context = {'event': event,
-                   'donators_count': donators_count, 'raised': raised, 'raised_p': raised_p}
+                   'donators_count': donators_count, 'raised': raised, 'raised_p': raised_p, 'bdonator': bdonator}
         return render(request, 'user/details.html', context)
     else:
-        get_total = donators.aggregate(Sum('amount'))
-        raised = get_total['amount__sum']
-        raised_p = (get_total['amount__sum']/event.goal)*100
+        get_total = donators.aggregate(Sum('success_amount'))
+        raised = get_total['success_amount__sum']
+        raised_p = (get_total['success_amount__sum']/event.goal)*100
         context = {'event': event,
-                   'donators_count': donators_count, 'raised': raised, 'raised_p': raised_p}
+                   'donators_count': donators_count, 'raised': raised, 'raised_p': raised_p, 'bdonator': bdonator}
         return render(request, 'user/details.html', context)
 
 
@@ -311,7 +334,7 @@ def update_event(request, pk):
         form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('back', pk=request.user.organization.id)
     context = {'form': form}
     return render(request, 'user/create_event.html', context)
 
